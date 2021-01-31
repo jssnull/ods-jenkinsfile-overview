@@ -9,4 +9,6 @@ TOC:
 6) **Predeterminated methods of quickstarter Jenkinsfile**
 7) **How to create my custom methods in a quickstarter Jenkinsfile**
 
+
+
 1)

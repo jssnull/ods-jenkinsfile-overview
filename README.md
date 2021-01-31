@@ -36,12 +36,6 @@ odsComponentPipeline(
   odsComponentStageImportOpenShiftImageOrElse(context) {
     stageBuild(context)
     stageUnitTest(context)
-    /*
-    * if you want to introduce scanning, uncomment the below line
-    * and change the type in metadata.yml to 'ods'
-    *
-    * odsComponentStageScanWithSonar(context)
-    */
     odsComponentStageBuildOpenShiftImage(context)
   }
   odsComponentStageRolloutOpenShiftDeployment(context)

@@ -118,7 +118,7 @@ def stageUnitTest(def context) {
 4) **How to create my custom methods in a quickstarter Jenkinsfile**
 Create custom methods in quickstarter Jenkinsfile is pretty simple, we only have to define it in our Jenkinsfile and invoke it from 
 odsComponentPipeline methods closure.
-```Note: Keep in mind that odsComponentPipeline executes declared stages sequentially````
+```Note: Keep in mind that odsComponentPipeline executes declared stages sequentially```
 
 
 

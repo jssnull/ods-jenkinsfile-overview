@@ -18,13 +18,17 @@ quickstarters that are deployed to openshift and synchronyzed with Atlassian sta
 containerized apps that can be found here: https://github.com/opendevstack/ods-quickstarters
 
 2) **Anatomy of a Quickstarter Jenkinsfile**
+Every quickstarter have a file called Jenkinsfile, is a groovy file that basically define all the instrucctions
+to use during quickstarter build, test and deploy phases, it can be used for invoke typical ODS methods like sonarqube analyisis of our application.
+
+Here We can see a minimal Jenkinsfile used for simply build and deploy a minimal Docker application
 ```groovy
 // See https://www.opendevstack.org/ods-documentation/ for usage and customization.
 // trigger commit
 @Library('ods-jenkins-shared-library@3.x') _
 
 odsComponentPipeline(
-  imageStreamTag: 'sampleodsproject/jenkins-agent-base:3.x',
+  imageStreamTag: 'myodsproject/jenkins-agent-base:3.x',
   branchToEnvironmentMapping: [
     'master': 'dev',
     // 'release/': 'test'

@@ -69,6 +69,23 @@ def stageUnitTest(def context) {
 Let's analyze all the code step by step.
 
 First of all we've the import of OpenDevStack basic libraries at ```groovy @Library('ods-jenkins-shared-library@3.x') _ ```
+```groovy odsComponentPipeline``` is the function that declares which ODS stages will be executed agains our application (build, test, deploy, etc).
+and also declares basic metadata used by ODS for build and deploy our app.
+
+odsComponentPipeline basic metadada:
+* imageStreamTag: The jenkins-slave docker image that will be used for building our app, aka jenkins agent. All ready to use images can be found here: https://github.com/opendevstack/ods-quickstarters/tree/master/common/jenkins-agents, also we can create our own custom jenkins agents directly in Openshift and use them 
+with ```imageStreamTag``` property
+* branchToEnvironmentMapping:
+Example:
+```groovy
+  branchToEnvironmentMapping: [
+    'master': 'dev',
+    // 'release/': 'test'
+  ]
+```
+This list is used for defining in which openshift namespace will be deployed the code tracked by a Git branch
+the content of this list should follow this format: ``` 'branch_name':'openshift_namespace' ``` possible values for openshift_namespace: 'dev' or 'test' 
+dev namespace aka "myproject-dev" is used as development environment, and test namespace aka "myproject-test" is used as QA environment 
 
 
 

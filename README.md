@@ -83,6 +83,7 @@ dev namespace aka "myproject-dev" is used as development environment, and test n
 After declare properties used by odsComponentPipeline, we'll declare which instructions will be executed agains our application before deploying it, we'll 
 cover this in the next section
 
+
 3) **Predetermined methods of quickstarter Jenkinsfile**
 * odsComponentStageImportOpenShiftImageOrElse: basically imports the application associated Openshift image, if is not possible execute all
 the stages declared in associated closure.
@@ -108,6 +109,7 @@ def stageUnitTest(def context) {
 * odsComponentStageScanWithSonar: scans repository code in ODS default sonarqube instance
 * odsComponentStageBuildOpenShiftImage: Triggers a build of the buildconfig associated to our application in Openshift
 * odsComponentStageRolloutOpenShiftDeployment: ensures that a deploy of our application is triggered after build phase
+
 
 4) **How to create my custom methods in a quickstarter Jenkinsfile**
 Create custom methods in quickstarter Jenkinsfile is pretty simple, we only have to define it in our Jenkinsfile and invoke it from 

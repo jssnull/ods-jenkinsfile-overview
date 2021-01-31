@@ -17,4 +17,46 @@ confluence project, bitbucket project and jira project. Also allow us to create 
 quickstarters that are deployed to openshift and synchronyzed with Atlassian stack (automatic build and deploy after every git push, jira integration), OpenDevStack supports a long list of
 containerized apps that can be found here: https://github.com/opendevstack/ods-quickstarters
 
-2) **What is an OpenDevStack Quickstarter**
+2) **Anatomy of a Quickstarter Jenkinsfile**
+```groovy
+// See https://www.opendevstack.org/ods-documentation/ for usage and customization.
+// trigger commit
+@Library('ods-jenkins-shared-library@3.x') _
+
+odsComponentPipeline(
+  imageStreamTag: 'sampleodsproject/jenkins-agent-base:3.x',
+  branchToEnvironmentMapping: [
+    'master': 'dev',
+    // 'release/': 'test'
+  ]
+) { context ->
+  odsComponentStageImportOpenShiftImageOrElse(context) {
+    stageBuild(context)
+    stageUnitTest(context)
+    /*
+    * if you want to introduce scanning, uncomment the below line
+    * and change the type in metadata.yml to 'ods'
+    *
+    * odsComponentStageScanWithSonar(context)
+    */
+    odsComponentStageBuildOpenShiftImage(context)
+  }
+  odsComponentStageRolloutOpenShiftDeployment(context)
+}
+
+def stageBuild(def context) {
+  stage('Build') {
+    // copy any other artifacts, if needed
+    // sh "cp -r build docker/dist"
+    // the docker context passed in /docker
+  }
+}
+
+def stageUnitTest(def context) {
+  stage('Unit Test') {
+    // add your unit tests here, if needed
+    
+  }
+}
+
+```

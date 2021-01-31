@@ -7,6 +7,9 @@ TOC:
 4) **How to create my custom methods in a quickstarter Jenkinsfile**
 
 Content:
+
+
+
 1) **What is OpenDevStack and OpenDevStack Quickstarters:**
 OpenDevStack is a framework that let us to create ready to use software projects using Openshift container platform
 and Atlassian Stack, OpenDevStack is composed mainly by a set of Jenkins pipelines and a graphical web application called 

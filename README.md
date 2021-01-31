@@ -120,7 +120,27 @@ Create custom methods in quickstarter Jenkinsfile is pretty simple, we only have
 odsComponentPipeline methods closure.
 ```Note: Keep in mind that odsComponentPipeline executes declared stages sequentially```
 
+Example of a custom stage that deploys a python package to a Nexus repository after building our application using python twine:
+```groovy
+def publishToNexusAfterBuild(def context) {
+  stage('Publish to Nexus') {
+    twine upload --verbose -u user -p password --repository-url https://nexus-hostname/repository/my-pip-repo/ dist/* 
+  }
+}
+```
 
+Stage invocation after building our application:
+```groovy
+  odsComponentStageImportOpenShiftImageOrElse(context) {
+    stageBuild(context)
+    stageUnitTest(context)
+    odsComponentStageScanWithSonar(context)
+    publishToNexusAfterBuild(context)
+    odsComponentStageBuildOpenShiftImage(context)
+  }
+```
+
+Having this our custom stage would be ready to use.
 
 
 

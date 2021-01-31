@@ -1,4 +1,4 @@
-# OpenDevStack Best practices
+# OpenDevStack Jenkinsfile overview
 
 TOC:
 1) **What is OpenDevStack**

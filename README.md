@@ -68,7 +68,7 @@ def stageUnitTest(def context) {
 
 Let's analyze all the code step by step.
 
-First of all we've the import of OpenDevStack basic libraries at ```groovy @Library('ods-jenkins-shared-library@3.x') _ ```
+First of all we've the import of OpenDevStack basic libraries at ```groovy @Library('ods-jenkins-shared-library@3.x') _ ```,
 ```groovy odsComponentPipeline``` is the function that declares which ODS stages will be executed agains our application (build, test, deploy, etc).
 and also declares basic metadata used by ODS for build and deploy our app.
 

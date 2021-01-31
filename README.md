@@ -2,11 +2,9 @@
 
 TOC:
 1) **What is OpenDevStack**
-3) **Anatomy of a Quickstarter Jenkinsfile**
-4) **Groovy coding conventions**
-5) **How to declare and use env vars during Quickstarter deploy and build processes**
-6) **Predeterminated methods of quickstarter Jenkinsfile**
-7) **How to create my custom methods in a quickstarter Jenkinsfile**
+2) **Anatomy of a Quickstarter Jenkinsfile**
+3) **Predetermined methods of quickstarter Jenkinsfile**
+4) **How to create my custom methods in a quickstarter Jenkinsfile**
 
 Content:
 1) **What is OpenDevStack and OpenDevStack Quickstarters:**
@@ -88,8 +86,10 @@ Example:
 This list is used for defining in which openshift namespace will be deployed the code tracked by a Git branch,
 the content of this list should follow this format: ``` 'branch_name':'openshift_namespace' ``` possible values for openshift_namespace: 'dev' or 'test' 
 dev namespace aka "myproject-dev" is used as development environment, and test namespace aka "myproject-test" is used as QA environment 
+After declare properties used by odsComponentPipeline, we'll declare which instructions will be executed agains our application before deploying it, we'll 
+cover this in the next section
 
-**odsComponentPipeline basic stages**
+3) **Predetermined methods of quickstarter Jenkinsfile**
 * odsComponentStageImportOpenShiftImageOrElse: basically imports the application associated Openshift image, if is not possible execute all
 the stages declared in associated closure.
 * stageBuild: default stage used for building the application, install dependencies, etc. This stage can be overwritten with needed commands. 
@@ -103,7 +103,6 @@ def stageBuild(def context) {
 }
 ```
 * stageUnitTest: default stage used for running application unit tests. This stage can be overwritten with needed commands.
-
 Example for testing a python app:
 ```groovy
 def stageUnitTest(def context) {
@@ -112,6 +111,16 @@ def stageUnitTest(def context) {
   }
 }
 ```
+* odsComponentStageScanWithSonar: scans repository code in ODS default sonarqube instance
+* odsComponentStageBuildOpenShiftImage: Triggers a build of the buildconfig associated to our application in Openshift
+* odsComponentStageRolloutOpenShiftDeployment: ensures that a deploy of our application is triggered after build phase
+
+4) **How to create my custom methods in a quickstarter Jenkinsfile**
+Create custom methods in quickstarter Jenkinsfile is pretty simple, we only have to define it in our Jenkinsfile and invoke it from 
+odsComponentPipeline methods closure.
+```Note: Keep in mind that odsComponentPipeline executes declared stages sequentially````
+
+
 
 
 

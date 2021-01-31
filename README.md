@@ -17,9 +17,10 @@ confluence project, bitbucket project and jira project. Also allow us to create 
 quickstarters that are deployed to openshift and synchronyzed with Atlassian stack (automatic build and deploy after every git push, jira integration), OpenDevStack supports a long list of
 containerized apps that can be found here: https://github.com/opendevstack/ods-quickstarters
 
-2) **Anatomy of a Quickstarter Jenkinsfile**
-Every quickstarter have a file called Jenkinsfile, is a groovy file that basically define all the instrucctions
-to use during quickstarter build, test and deploy phases, it can be used for invoke typical ODS methods like sonarqube analyisis of our application.
+2) **Anatomy of a Quickstarter Jenkinsfile:**
+Every quickstarter have a file called Jenkinsfile, it's a groovy file that basically define all the instrucctions
+to use during quickstarter build, test and deploy phases, it can be used for invoke typical ODS methods like sonarqube analyisis of our application (odsComponentStageScanWithSonar).
+
 
 Here We can see a minimal Jenkinsfile used for simply build and deploy a minimal Docker application
 ```groovy
@@ -64,3 +65,10 @@ def stageUnitTest(def context) {
 }
 
 ```
+
+Let's analyze all the code step by step.
+
+First of all we've the import of OpenDevStack basic libraries at ```groovy @Library('ods-jenkins-shared-library@3.x') _ ```
+
+
+

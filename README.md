@@ -90,5 +90,28 @@ the content of this list should follow this format: ``` 'branch_name':'openshift
 dev namespace aka "myproject-dev" is used as development environment, and test namespace aka "myproject-test" is used as QA environment 
 
 **odsComponentPipeline basic stages**
+* odsComponentStageImportOpenShiftImageOrElse: basically imports the application associated Openshift image, if is not possible execute all
+the stages declared in associated closure.
+* stageBuild: default stage used for building the application, install dependencies, etc. This stage can be overwritten with needed commands. 
+Example for building a python app:
+```groovy
+def stageBuild(def context) {
+  stage('Build') {
+    // install python packages:
+    sh "pip install requirements.txt"
+  }
+}
+```
+* stageUnitTest: default stage used for running application unit tests. This stage can be overwritten with needed commands.
+
+Example for testing a python app:
+```groovy
+def stageUnitTest(def context) {
+  stage('Unit Test') {
+    sh "nosetests -v --with-xunit --xunit-file=test-results.xml --with-coverage --cover-xml --cover-xml-file=coverage.xml"
+  }
+}
+```
+
 
 

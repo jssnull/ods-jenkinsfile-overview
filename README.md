@@ -26,7 +26,6 @@ to use during quickstarter build, test and deploy phases, it can be used for inv
 Here We can see a minimal Jenkinsfile used for simply build and deploy a minimal Docker application
 ```groovy
 // See https://www.opendevstack.org/ods-documentation/ for usage and customization.
-// trigger commit
 @Library('ods-jenkins-shared-library@3.x') _
 
 odsComponentPipeline(
